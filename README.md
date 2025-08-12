@@ -68,14 +68,14 @@ gitignore
 
 ## 🛠️Ejecucion local API Web:
 ### Clonar repositorio
-git clone https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB.git
-cd ToDo-List_API-WEB
+  git clone https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB.git
+  cd ToDo-List_API-WEB
 ### Levantar servicios
-docker compose up
+  docker compose up
 
 ## 💡Testing:
-cd nodeJs_ToDoList_backend
-npm run test
+ - cd nodeJs_ToDoList_backend
+ - npm run test
 
 ## 🌐 Despliegues:
  - Backend:
@@ -83,4 +83,4 @@ npm run test
 
 ## 📄 Autoria:
 Anthony Josue Escobar Ponce 
-[Portafolio](https://ae--technologies.web.app/index.html) | [LinkedIn](https://www.linkedin.com/in/tuusuario/)
+  [Portafolio](https://ae--technologies.web.app/index.html) | [LinkedIn](https://www.linkedin.com/in/tuusuario/)

@@ -1,0 +1,36 @@
+{
+  "name": "todo-list_api-web",
+  "version": "1.0.0",
+  "description": "Aplicación web de gestión de tareas desarrollada con MongoDB, Express, React y Node.js (Stack MERN) \r siguiendo el [diseño provisto en Behance](https://www.behance.net/gallery/168706675/React-Js-Todo-List-App?tracking_source=search_projects&l=38)\r ### 📌Requerimientos basicos: \r - Persistencia de estado (guardar la data en una DB)\r - Se espera que el resultado final sea lo más parecido posible al diseño proporcionado.\r ###📍Requerimientos extra:\r - Test unitarios\r - Docker compose para levantar todos los servicios\r - Animaciones en UI que permitan una experiencia más agradable\r - Aplicar principios SOLID dentro de su código\r - Publicar el sitio en algún servicio de hosting gratuito (esto depende mucho de las tecnologías que se elijan)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB/issues"
+  },
+  "homepage": "https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.17.1",
+    "morgan": "^1.10.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

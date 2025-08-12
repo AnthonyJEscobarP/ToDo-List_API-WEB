@@ -12,12 +12,12 @@ siguiendo el [diseño provisto en Behance](https://www.behance.net/gallery/16870
 - Publicar el sitio en algún servicio de hosting gratuito (esto depende mucho de las tecnologías que se elijan)
 
 ## 💻Tecnologías:
-Frontend: React.js + Vite
-Backend: Node.js + Express
-Base de datos: MongoDB Atlas
-Estilos: CSS 
-Testing: Jest + Supertest
-Infraestructura : Docker Compose para ejecución local
+- Frontend: React.js + Vite
+- Backend: Node.js + Express
+- Base de datos: MongoDB Atlas
+- Estilos: CSS 
+- Testing: Jest + Supertest
+- Infraestructura : Docker Compose para ejecución local
 
 ## 📂Estructura principal del proyecto:
 /reactJs_ToDoList_frontend
@@ -83,5 +83,4 @@ npm run test
 
 ## 📄 Autoria:
 Anthony Josue Escobar Ponce 
-[Portafolio](https://ae--technologies.web.app/index.html)
-[LinkedIn](https://www.linkedin.com/in/tuusuario/)
+[Portafolio](https://ae--technologies.web.app/index.html) | [LinkedIn](https://www.linkedin.com/in/tuusuario/)

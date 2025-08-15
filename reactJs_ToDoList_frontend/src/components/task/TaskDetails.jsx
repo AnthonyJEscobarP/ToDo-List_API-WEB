@@ -1,40 +1,89 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTaskDetails } from '../../hooks/useTaskDetails.jsx';
+import { editTask as editTaskRequest } from '../../services/api.jsx';
+import toast from 'react-hot-toast';
 
 export const TaskDetails = ({ tid, onClose, getTasks }) => {
-  const { isFetching, taskDetails, getTaskDetails } = useTaskDetails();
+  const { taskDetails, getTaskDetails, isFetching } = useTaskDetails();
+  const [formData, setFormData] = useState({ title: '', description: '', dueDate: '', status: 'INCOMPLETE' });
 
   useEffect(() => {
-    if (tid) getTaskDetails(tid);
-  }, [getTaskDetails, tid]);
+    if (tid && tid !== 'new') getTaskDetails(tid);
+  }, [tid, getTaskDetails]);
+
+  useEffect(() => {
+    if (taskDetails) {
+      setFormData({
+        title: taskDetails.title || '',
+        description: taskDetails.description || '',
+        dueDate: taskDetails.dueDate ? taskDetails.dueDate.split('T')[0] : '',
+        status: taskDetails.status || 'INCOMPLETE'
+      });
+    }
+  }, [taskDetails]);
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSave = async () => {
+    if (tid === 'new') return; // Crear tarea nueva aún no implementado
+    const res = await editTaskRequest(tid, formData);
+    if (res.error) return toast.error(res.description || "Failed to update task");
+    toast.success("Task updated!");
+    getTasks?.();
+    onClose();
+  };
 
   if (!tid) return null;
-  
+
   return (
     <div className="modal-overlay">
       <div className="modal-card">
         <button className="modal-close" onClick={onClose}>✖</button>
 
-        {isFetching || !taskDetails
-          ? <div>Loading...</div>
-          : (
-            <div className='task-view'>
-              tid={taskDetails.tid}
-              <h1>{taskDetails.title}</h1>
-              <p><strong>Status:</strong> {taskDetails.status}</p>
-              <p><strong>Due Date:</strong> {taskDetails.dueDate}</p>
-              <p><strong>Creation Date:</strong> {taskDetails.createdAt}</p>
-              <div>
-                <p><strong>Description:</strong> {taskDetails.description}</p>
-              </div>
+        {isFetching && <div>Loading...</div>}
 
-              {typeof getTasks === 'function' && (
-                <button onClick={getTasks}>Refresh list</button>
-              )}
-            </div>
-          )
-        }
+        {!isFetching && (
+          <div className="task-form">
+            <input
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Title"
+            />
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Description"
+            />
+            <input
+              type="date"
+              name="dueDate"
+              value={formData.dueDate}
+              onChange={handleChange}
+            />
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+            >
+              <option value="INCOMPLETE">INCOMPLETE</option>
+              <option value="COMPLETE">COMPLETE</option>
+              <option value="DUE">DUE</option>
+            </select>
+
+            {taskDetails && (
+              <div className="task-info">
+                <p><strong>TID:</strong> {taskDetails.tid}</p>
+                <p><strong>Creation Date:</strong> {taskDetails.createdAt ? taskDetails.createdAt.split('T')[0] : ''}</p>
+                <p><strong>Due Date:</strong> {taskDetails.dueDate ? taskDetails.dueDate.split('T')[0] : ''}</p>
+              </div>
+            )}
+
+            <button onClick={handleSave}>Save</button>
+          </div>
+        )}
       </div>
     </div>
   );

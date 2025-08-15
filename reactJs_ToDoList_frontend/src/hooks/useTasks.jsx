@@ -8,26 +8,26 @@ export const useTasks = () => {
 
     const getTasksFunction = useCallback(async () => {
         setIsFetching(true);
-        const tasksData = await findTasksRequest();
-
+        const tasksData = await findTasksRequest({});
         if (tasksData.error) {
-            toast.error(tasksData.e?.response?.data || "Error fetching tasks");
+            toast.error(tasksData.description?.message || "Error fetching tasks");
             setIsFetching(false);
             return;
         }
-        setTasks(tasksData.data.task);
+        setTasks(tasksData.data?.task || []);
         setIsFetching(false);
     }, []);
 
+
     const filterTasks = useCallback(async (filters) => {
         setIsFetching(true);
-        const tasksData = await findTasksRequest(filters);
-        if (tasksData.error) {
-            toast.error(tasksData.e?.response?.data || "Error filtering tasks");
-            setIsFetching(false);
-            return;
+        const response = await findTasksRequest(filters);
+        if (response.error) {
+            toast.error(response.description);
+            setTasks([]);
+        } else {
+            setTasks(response.data);
         }
-        setTasks(tasksData.data?.task);
         setIsFetching(false);
     }, []);
 
@@ -36,9 +36,9 @@ export const useTasks = () => {
     }, [getTasksFunction]);
 
     return {
-        getTasks: getTasksFunction,
         tasks,
         isFetching,
+        getTasks: getTasksFunction,
         filterTasks
     };
 };

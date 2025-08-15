@@ -28,7 +28,7 @@ export const createTask = async (req, res) => {
 export const findTasks = async (req, res) => {
     try {
         const { limit = 10, from = 0 } = req.query;
-        const { tid, title, created, dueDate, status } = req.body;
+        const { tid, title, created, dueDate, status } = req.body || {};;
 
         let filterParameter = {};
 

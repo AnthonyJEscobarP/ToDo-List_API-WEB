@@ -4,22 +4,23 @@ import { getTaskDetails as getTaskDetailsRequest } from '../services/api.jsx';
 
 export const useTaskDetails = () => {
     const [taskDetails, setTaskDetails] = useState(null);
+    const [isFetching, setIsFetching] = useState(false);
 
     const getTaskDetails = useCallback(async (tid) => {
-        try {
-            const response = await getTaskDetailsRequest(tid);
-            if (response.error) {
-                return toast.error(response.e?.response?.data || "Failed to get task details");
-            }
+        setIsFetching(true);
+        const response = await getTaskDetailsRequest(tid);
+        if (response.error) {
+            toast.error(response.description);
+            setTaskDetails(null);
+        } else {
             setTaskDetails(response.data);
-        } catch (err) {
-            toast.error(err.data || "Failed to get task details");
         }
+        setIsFetching(false);
     }, []);
 
     return {
         taskDetails,
-        isFetching: !taskDetails || !taskDetails.pid,
+        isFetching,
         getTaskDetails
     };
 };

@@ -2,66 +2,53 @@ import axios from 'axios';
 
 const apiClient = axios.create({
     baseURL: 'https://node-js-to-do-list-backend.vercel.app/aeToDoList/v1',
-    timeout: 3000,
-    httpsAgent: false
+    timeout: 5000,
 });
 
 export const getTaskDetails = async (tid) => {
   try {
     const response = await apiClient.post('/task/findTasks', { tid });
-    if (response.data && response.data.task && response.data.task.length > 0) {
+    if (response.data?.task?.length > 0) {
       return { data: response.data.task[0] };
-    } else {
-      return { error: true, description: "Task not found" };
     }
+    return { error: true, description: "Task not found" };
   } catch (err) {
-    return {
-      error: true,
-      description: err
-    };
+    return { error: true, description: err.response?.data?.message || err.message };
   }
 };
 
 export const findTasks = async (filters) => {
   try {
-    return await apiClient.post('/task/findTasks', filters);
+    const response = await apiClient.post('/task/findTasks', filters);
+    return { data: response.data };
   } catch (err) {
-    return {
-      error: true,
-      description: err
-    }
+    return { error: true, description: err.response?.data?.message || err.message };
   }
 };
 
 export const createTask = async (taskData) => {
   try {
-    return await apiClient.post('/task/createTask', taskData);
+    const response = await apiClient.post('/task/createTask', taskData);
+    return { data: response.data };
   } catch (err) {
-    return {
-      error: true,
-      description: err
-    }
+    return { error: true, description: err.response?.data?.message || err.message };
   }
 };
 
 export const editTask = async (tid, newData) => {
   try {
-    return await apiClient.put(`/task/editTask/${tid}`, { newData });
+    const response = await apiClient.put(`/task/editTask/${tid}`, { newData });
+    return { data: response.data };
   } catch (err) {
-    return {
-      error: true,
-      description: err
-    }
+    return { error: true, description: err.response?.data?.message || err.message };
   }
 };
 
 export const deleteTask = async (tid) => {
   try {
-    return await apiClient.delete(`/task/deleteTask/${tid}`);
+    const response = await apiClient.delete(`/task/deleteTask/${tid}`);
+    return { data: response.data };
   } catch (err) {
-    return {
-      error: true,
-      description: err
-    }
+    return { error: true, description: err.response?.data?.message || err.message };
   }
 };

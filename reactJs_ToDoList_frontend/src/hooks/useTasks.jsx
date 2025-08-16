@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
-import { findTasks as findTasksRequest } from '../services/api.jsx';
+import { findTasks as findTasksRequest, deleteTask as deleteTaskRequest } from '../services/api.jsx';
 
 export const useTasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -8,28 +8,37 @@ export const useTasks = () => {
 
     const getTasksFunction = useCallback(async () => {
         setIsFetching(true);
-        const tasksData = await findTasksRequest({});
-        if (tasksData.error) {
-            toast.error(tasksData.description?.message || "Error fetching tasks");
-            setIsFetching(false);
-            return;
+        const res = await findTasksRequest({});
+        if (res.error) {
+            toast.error(res.description || "Error fetching tasks");
+            setTasks([]);
+        } else {
+            setTasks(res.data.task || []);
         }
-        setTasks(tasksData.data?.task || []);
         setIsFetching(false);
     }, []);
-
 
     const filterTasks = useCallback(async (filters) => {
         setIsFetching(true);
-        const response = await findTasksRequest(filters);
-        if (response.error) {
-            toast.error(response.description);
+        const res = await findTasksRequest(filters);
+        if (res.error) {
+            toast.error(res.description || "Error filtering tasks");
             setTasks([]);
         } else {
-            setTasks(response.data);
+            setTasks(res.data.task || []);
         }
         setIsFetching(false);
     }, []);
+
+    const deleteTask = useCallback(async (tid) => {
+        const res = await deleteTaskRequest(tid);
+        if (res.error) {
+            toast.error(res.description || "Error deleting task");
+        } else {
+            toast.success("Task deleted!");
+            getTasksFunction(); // Actualiza la lista
+        }
+    }, [getTasksFunction]);
 
     useEffect(() => {
         getTasksFunction();
@@ -39,6 +48,7 @@ export const useTasks = () => {
         tasks,
         isFetching,
         getTasks: getTasksFunction,
-        filterTasks
+        filterTasks,
+        deleteTask
     };
 };

@@ -21,7 +21,7 @@ const options = {
         ],
     },
     apis: [
-        "../src/routes/tasks.routes.js"
+        "../src/routes/task.routes.js"
     ],
 };
 

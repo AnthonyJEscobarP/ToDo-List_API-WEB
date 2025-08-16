@@ -32,13 +32,7 @@ const taskSchema = Schema({
 
 taskSchema.methods.toJSON = function () {
     const { __v, _id, ...taskDb } = this.toObject();
-    taskDb.pid = _id;
-    if (taskDb.dueDate) {
-        taskDb.dueDate = format(new Date(taskDb.dueDate), "dd/MM/yyyy HH:mm", { locale: es });
-    }
-    if (taskDb.createdAt) {
-        taskDb.createdAt = format(new Date(taskDb.createdAt), "dd 'de' MMMM 'de' yyyy", { locale: es });
-    }
+    taskDb.tid = _id;
     return taskDb;
 };
 

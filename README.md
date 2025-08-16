@@ -19,53 +19,6 @@ siguiendo el [diseño provisto en Behance](https://www.behance.net/gallery/16870
 - Testing: Jest + Supertest
 - Infraestructura : Docker Compose para ejecución local
 
-## 📂Estructura principal del proyecto:
-/reactJs_ToDoList_frontend
-  /firebase
-  /dist
-  /node_modules
-  /public
-  /src
-    /assets
-    /components
-    /hooks
-    /pages
-    /services
-    App.jsx
-    index.css
-    main.jsx
-    routes.jsx
-    
-  .firebaserc
-  eslint.config.js
-  firebase.json
-  index.html
-  package.json
-  package-lock.json
-  vite.config.js
-  
-/nodeJs_ToDoList_backend
-  /vercel
-  /configs
-  /node_modules
-  /src
-    /models
-    /controller
-    /routes
-    /helpers
-    /middlewares
-    
-  .env
-  index.js
-  package.json
-  package-lock.json
-  vercel.json
-  
-docker-compose.yml
-README.md
-LICENSE
-gitignore
-
 ## 🛠️Ejecucion local API Web:
 ### Clonar repositorio
   git clone https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB.git
@@ -73,14 +26,13 @@ gitignore
 ### Levantar servicios
   docker compose up
 
-## 💡Testing:
- - cd nodeJs_ToDoList_backend
- - npm run test
-
 ## 🌐 Despliegues:
- - Backend:
- - Frontend:
+ - ⚙️ Backend : https://node-js-to-do-list-backend.vercel.app/
+ 
+ - 📱 Frontend: https://ae-todo-list.web.app/
 
 ## 📄 Autoria:
 Anthony Josue Escobar Ponce 
-  [Portafolio](https://ae--technologies.web.app/index.html) | [LinkedIn](https://www.linkedin.com/in/tuusuario/)
+  💡[Portafolio](https://ae--technologies.web.app/index.html) 
+
+  🔎[LinkedIn](https://www.linkedin.com/in/tuusuario/)

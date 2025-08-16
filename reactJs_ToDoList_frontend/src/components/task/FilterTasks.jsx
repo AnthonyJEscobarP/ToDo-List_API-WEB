@@ -1,14 +1,18 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const FilterTasks = ({ onFilter }) => {
+export const FilterTasks = ({ onFilter,setAddingTask }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [dueDate, setDueDate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFilter({ title, status, dueDate });
+    const filters = {};
+    if (title) filters.title = title;
+    if (status) filters.status = status;
+    if (dueDate) filters.dueDate = dueDate;
+    onFilter(filters);
   };
 
   const handleClear = () => {
@@ -19,31 +23,35 @@ export const FilterTasks = ({ onFilter }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="filter-form">
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
-        <option value="">All</option>
-        <option value="INCOMPLETE">INCOMPLETE</option>
-        <option value="COMPLETE">COMPLETE</option>
-        <option value="DUE">DUE</option>
-      </select>
-
-      <input
-        type="text"
-        placeholder="Search title..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
-      />
-
-      <input
-        type="date"
-        value={dueDate}
-        onChange={(e) => setDueDate(e.target.value)}
-      />
-
-      <button type="submit">Filter</button>
-      <button type="button" onClick={handleClear}>Clear</button>
-    </form>
+    <div className="filter-form-wrapper">
+      <form onSubmit={handleSubmit} className="filter-form">
+        <button className="btn-add-task" onClick={() => setAddingTask(true)}>
+          Add Task
+        </button>
+        <input
+          type="text"
+          placeholder="Search title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
+        />
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option value="">ALL</option>
+          <option value="INCOMPLETE">INCOMPLETE</option>
+          <option value="COMPLETE">COMPLETE</option>
+          <option value="DUE">DUE</option>
+        </select>
+      </form>
+      <div className="filter-buttons">
+        <button type="button" onClick={handleSubmit}>Search</button>
+        <button type="button" onClick={handleClear}>Clear</button>
+      </div>
+    </div>
   );
 };
 

@@ -26,7 +26,7 @@ export const TaskDetails = ({ tid, onClose, getTasks }) => {
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSave = async () => {
-    if (tid === 'new') return; // Crear tarea nueva aún no implementado
+    if (tid === 'new') return;
     const res = await editTaskRequest(tid, formData);
     if (res.error) return toast.error(res.description || "Failed to update task");
     toast.success("Task updated!");
@@ -40,11 +40,10 @@ export const TaskDetails = ({ tid, onClose, getTasks }) => {
     <div className="modal-overlay">
       <div className="modal-card">
         <button className="modal-close" onClick={onClose}>✖</button>
-
+        <h2 className="modal-title modal-title-gray">Update Task</h2>
         {isFetching && <div>Loading...</div>}
-
         {!isFetching && (
-          <div className="task-form">
+          <form className="task-form">
             <input
               name="title"
               value={formData.title}
@@ -57,12 +56,14 @@ export const TaskDetails = ({ tid, onClose, getTasks }) => {
               onChange={handleChange}
               placeholder="Description"
             />
+            <label className="modal-label">Due Date</label>
             <input
               type="date"
               name="dueDate"
               value={formData.dueDate}
               onChange={handleChange}
             />
+            <label className="modal-label">Status</label>
             <select
               name="status"
               value={formData.status}
@@ -72,17 +73,11 @@ export const TaskDetails = ({ tid, onClose, getTasks }) => {
               <option value="COMPLETE">COMPLETE</option>
               <option value="DUE">DUE</option>
             </select>
-
-            {taskDetails && (
-              <div className="task-info">
-                <p><strong>TID:</strong> {taskDetails.tid}</p>
-                <p><strong>Creation Date:</strong> {taskDetails.createdAt ? taskDetails.createdAt.split('T')[0] : ''}</p>
-                <p><strong>Due Date:</strong> {taskDetails.dueDate ? taskDetails.dueDate.split('T')[0] : ''}</p>
-              </div>
-            )}
-
-            <button onClick={handleSave}>Save</button>
-          </div>
+            <div className="modal-actions">
+              <button className="modal-save" type="button" onClick={handleSave}>Update Task</button>
+              <button className="modal-cancel" type="button" onClick={onClose}>Cancel</button>
+            </div>
+          </form>
         )}
       </div>
     </div>

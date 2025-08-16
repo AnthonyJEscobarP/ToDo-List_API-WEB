@@ -8,7 +8,7 @@ export const taskFound = async (tid = " ") => {
 };
 
 export const validStatus = async (status = " ") => {
-    if (status !== "INCOMPLETE" || status !== "COMPLETE" || status !== "DUE") {
+    if (status !== "INCOMPLETE" && status !== "COMPLETE" && status !== "DUE") {
         throw new Error(`The status provided is not valid, it must be either 'INCOMPLETE', 'COMPLETE' or 'DUE'`);
     }
 };

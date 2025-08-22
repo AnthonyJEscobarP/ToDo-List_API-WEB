@@ -21,10 +21,10 @@ siguiendo el [diseño provisto en Behance](https://www.behance.net/gallery/16870
 
 ## 🛠️Ejecucion local API Web:
 ### Clonar repositorio
-  git clone https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB.git
-  cd ToDo-List_API-WEB
+- git clone https://github.com/AnthonyJEscobarP/ToDo-List_API-WEB.git
+- cd ToDo-List_API-WEB
 ### Levantar servicios
-  docker compose up
+- docker compose up
 
 ## 🌐 Despliegues:
  - ⚙️ Backend : https://node-js-to-do-list-backend.vercel.app/
@@ -32,7 +32,7 @@ siguiendo el [diseño provisto en Behance](https://www.behance.net/gallery/16870
  - 📱 Frontend: https://ae-todo-list.web.app/
 
 ## 📄 Autoria:
-Anthony Josue Escobar Ponce 
-  💡[Portafolio](https://ae--technologies.web.app/index.html) 
+- ### Anthony Josue Escobar Ponce 
+  - 💡[Portafolio](https://ae--technologies.web.app/index.html) 
 
-  🔎[LinkedIn](www.linkedin.com/in/anthony-josué-escobar-ponce-71004437b)
+  - 🔎[LinkedIn](www.linkedin.com/in/anthony-josué-escobar-ponce-71004437b)

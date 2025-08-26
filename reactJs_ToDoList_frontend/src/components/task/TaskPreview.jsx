@@ -14,7 +14,7 @@ export const TaskPreview = ({ tid, title, createdAt, dueDate, status, openTaskHa
         />
       </div>
       <div className="task_info">
-        <span className={`task_preview_title${status === "COMPLETE" ? " strikethrough" : ""}`}>
+        <span className={`task_preview_title${status === "COMPLETE" || status === "DUE" ? " strikethrough" : ""}`}>
           {title}
         </span>
         <div className="task_preview_dates">

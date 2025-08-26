@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiClient = axios.create({
     baseURL: 'https://node-js-to-do-list-backend.vercel.app/aeToDoList/v1',
-    timeout: 5000,
+    timeout: 11000,
 });
 
 export const getTaskDetails = async (tid) => {

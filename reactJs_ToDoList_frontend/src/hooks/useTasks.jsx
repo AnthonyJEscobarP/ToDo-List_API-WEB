@@ -6,6 +6,14 @@ export const useTasks = () => {
     const [tasks, setTasks] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
 
+    function sortTasksByDueDate(tasks) {
+        return [...tasks].sort((a, b) => {
+            if (a.status === "INCOMPLETE" && b.status !== "INCOMPLETE") return -1;
+            if (a.status !== "INCOMPLETE" && b.status === "INCOMPLETE") return 1;
+            return new Date(b.dueDate) - new Date(a.dueDate);
+        });
+    }
+
     const getTasksFunction = useCallback(async () => {
         setIsFetching(true);
         const res = await findTasksRequest({});
@@ -13,7 +21,7 @@ export const useTasks = () => {
             toast.error(res.description || "Error fetching tasks");
             setTasks([]);
         } else {
-            setTasks(res.data.task || []);
+            setTasks(sortTasksByDueDate(res.data.task || []));
         }
         setIsFetching(false);
     }, []);
@@ -25,7 +33,7 @@ export const useTasks = () => {
             toast.error(res.description || "Error filtering tasks");
             setTasks([]);
         } else {
-            setTasks(res.data.task || []);
+            setTasks(sortTasksByDueDate(res.data.task || []));
         }
         setIsFetching(false);
     }, []);

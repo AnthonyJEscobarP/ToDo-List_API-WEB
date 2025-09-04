@@ -35,4 +35,4 @@ siguiendo el [diseño provisto en Behance](https://www.behance.net/gallery/16870
 - ### Anthony Josue Escobar Ponce 
   - 💡[Portafolio](https://ae--technologies.web.app/index.html) 
 
-  - 🔎[LinkedIn](www.linkedin.com/in/anthony-josué-escobar-ponce-71004437b)
+  - 🔎[LinkedIn](www.linkedin.com/in/anthonyjosue-escobar-ponce)
